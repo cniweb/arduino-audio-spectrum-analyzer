@@ -21,7 +21,10 @@ char data_avgs[32];
 float peaks[32];
 int i = 0, val, Rval;
 int x = 0, y = 0, z = 0;
-LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
+// initialize the LiquidCrystal library by associating any needed LCD interface pin
+// with the arduino pin number it is connected to
+const int rs = 7, en = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 // VU METER CHARACTERS
 byte v1[8] = {
