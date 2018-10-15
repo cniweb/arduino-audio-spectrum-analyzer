@@ -8,6 +8,7 @@
 
 #define LCHAN 7
 #define RCHAN 6
+#define RELAY 10
 const int channels = 1;
 const int xres = 16;
 const int yres = 8;
@@ -53,6 +54,14 @@ void setup() {
   //  Serial.begin(9600);
 
   lcd.begin(16, 2);
+  lcd.clear();
+  lcd.setCursor(x, 0); // clear first row
+  lcd.print(" Subwoofer Amp  ");
+  lcd.setCursor(x, 1); // draw second row
+  lcd.print("  by cni V1.0   ");
+  delay(2000);
+  pinMode(RELAY, OUTPUT);
+  digitalWrite(RELAY, HIGH);
   lcd.clear();
   lcd.createChar(1, v1);
   lcd.createChar(2, v2);
