@@ -12,8 +12,8 @@
 const int channels = 1;
 const int xres = 16;
 const int yres = 8;
-const int gain = 3;
-//int decayrate = 2; // larger number is longer decay
+const int gain = 6;
+int decayrate = 8; // larger number is longer decay
 int decaytest = 1;
 char im[64], data[64];
 char Rim[64], Rdata[64];
@@ -81,11 +81,11 @@ void setup() {
 void loop() {
   //  delay(10);
   for (i = 0; i < 64; i++) {
-    val = ((analogRead(LCHAN) / 4 ) - 128);  // chose how to interpret the data from analog in
+    val = ((analogRead(LCHAN) / 1 ) - 128);  // chose how to interpret the data from analog in
     data[i] = val;
     im[i] = 0;
     if (channels == 2) {
-      Rval = ((analogRead(RCHAN) / 4 ) - 128);  // chose how to interpret the data from analog in
+      Rval = ((analogRead(RCHAN) / 1 ) - 128);  // chose how to interpret the data from analog in
       Rdata[i] = Rval;
       Rim[i] = 0;
     }
@@ -106,9 +106,9 @@ void loop() {
     }
   }
 
-  // todo: average as many or as little dynamically based on yres
+  // todo: average as many or as little dynamically based on y resolution
   for (i = 0; i < 32; i++) {
-    data_avgs[i] = (data[i]);// + data[i*2+1]);// + data[i*3 + 2]);// + data[i*4 + 3]);  // add 3 samples to be averaged, use 4 when yres < 16
+    data_avgs[i] = (data[i*2+1]); //data[i]);// + data[i*2+1]);// + data[i*3 + 2]);// + data[i*4 + 3]);  // add 3 samples to be averaged, use 4 when yres < 16
     data_avgs[i] = constrain(data_avgs[i], 0, 9 - gain); //data samples * range (0-9) = 9
     data_avgs[i] = map(data_avgs[i], 0, 9 - gain, 0, yres);      // remap averaged values
   }
